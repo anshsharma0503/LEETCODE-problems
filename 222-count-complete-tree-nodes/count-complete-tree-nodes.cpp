@@ -1,18 +1,32 @@
 class Solution {
 public:
-    int res;
+    int leftht(TreeNode* root){
+        int lh = 0;
+        while(root){
+            lh++;
+            root = root -> left;
+        } 
 
-    void dfs(TreeNode* root){
-        if(root == nullptr) return;
-        res++;
-        dfs(root -> left);
-        dfs(root -> right);
+        return lh;
+    }
+    int rightht(TreeNode* root){
+        int rh = 0;
+        while(root){
+            rh++;
+            root = root -> right;
+        } 
+
+        return rh;
     }
 
     int countNodes(TreeNode* root) {
-        res = 0;
-        dfs(root);
+        if(root == NULL) return 0;
 
-        return res;
+        int lh = leftht(root);
+        int rh = rightht(root);
+
+        if(lh == rh) return (1 << lh) -1;
+
+        return 1 + countNodes(root -> left) + countNodes(root -> right);
     }
 };
