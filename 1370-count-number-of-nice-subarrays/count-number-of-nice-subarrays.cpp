@@ -1,24 +1,29 @@
 class Solution {
 public:
-    int atMost(vector<int>& nums, int k){
-        if(k < 0) return 0;
-        int l=0 , oddcnt = 0;
-        int res =0;
-        for(int r = 0 ; r < nums.size() ; r++){
-            if(nums[r] % 2 == 1) oddcnt++;
+    int numberOfSubarrays(vector<int>& nums, int k) {
+        int n = nums.size();
+        int ans = 0;
 
-            while(oddcnt > k){
-                if(nums[l] % 2 == 1) oddcnt--;
-                l++;
-            }
-            res = res + (r - l + 1);
-
+        vector<int> arr(n);
+        for(int i = 0; i < n ; i++){
+            if(nums[i] % 2 == 1) arr[i] = 1;
+            else arr[i] = 0;
         }
 
-        return res;
-    }
+        vector<int> pre(n);
+        pre[0]=arr[0];
 
-    int numberOfSubarrays(vector<int>& nums, int k) {
-        return atMost(nums , k) - atMost(nums , k - 1);
+        for(int i = 1; i < n ; i++) pre[i] = pre[i - 1] + arr[i];
+
+        unordered_map<int , int> freq;
+        freq[0] = 1;
+
+        for(int i = 0 ; i< nums.size() ; i++){
+            int need = pre[i] - k;
+            if(freq.find(need) != freq.end()) ans += freq[need];
+            freq[pre[i]]++;
+        }
+
+        return ans;
     }
 };
