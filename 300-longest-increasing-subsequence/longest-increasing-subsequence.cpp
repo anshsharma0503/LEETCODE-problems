@@ -6,9 +6,7 @@ public:
     int f(int i  , int prev, vector<int>& nums){
         if(i == nums.size()) return 0;
 
-        if(prev != -1){
-            if(dp[i][prev] != -1) return dp[i][prev];
-        }
+        if(dp[i][prev + 1] != -1) return dp[i][prev + 1];
 
         int notTake = f(i + 1  , prev, nums);
         
@@ -17,15 +15,13 @@ public:
             take = 1 + f(i + 1 , i, nums);
         }
 
-        if(prev != -1){
-            return dp[i][prev] = max(take , notTake);
-        }
-        return max(take , notTake);
+            return dp[i][prev + 1] = max(take , notTake);
+
         
     }
 
     int lengthOfLIS(vector<int>& nums) {
-        dp.resize(nums.size() , vector<int> (nums.size() ,-1));
+        dp.resize(nums.size() , vector<int> (nums.size() + 1 ,-1));
         return f(0 , -1 , nums);
     }
 };
