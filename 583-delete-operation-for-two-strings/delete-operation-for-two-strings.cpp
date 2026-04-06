@@ -9,7 +9,7 @@ public:
 
         if(dp[i][j] != -1) return dp[i][j];
 
-        if(s1[i] == s2[j]) return f(i + 1 , j + 1 , s1 , s2);
+        if(s1[i] == s2[j]) return dp[i][j] =  f(i + 1 , j + 1 , s1 , s2);
 
         return dp[i][j] = 1 +  min(f(i + 1 , j , s1 , s2) , f(i , j + 1 , s1 , s2));
     }
