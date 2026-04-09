@@ -14,7 +14,7 @@ public:
             }
         }
 
-        if(cnt == 0) return 0;
+        // if(cnt == 0) return 0;
 
         return intervals.size() - cnt;
     }
