@@ -9,7 +9,7 @@ public:
 
         int curr = nums[0];
 
-        for(int i = 0 ;i < n ; i++){
+        for(int i = 1 ;i < n ; i++){
             curr--;
             if(curr < 0) return false;
             curr = max(curr , nums[i]);
