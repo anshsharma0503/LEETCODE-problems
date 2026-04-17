@@ -3,9 +3,9 @@ public:
     bool canJump(vector<int>& nums) {
         int n = nums.size();
 
-        if(n == 1) {
-            if(nums[0] == 0) return true;
-        }
+        // if(n == 1) {
+        //     if(nums[0] == 0) return true;
+        // }
 
         int curr = nums[0];
 
