@@ -21,8 +21,6 @@ public:
 
         queue<int> q;
 
-        // Phase 1:
-        // Remove leaves with no coins
         for (int i = 0; i < n; i++) {
             if (degree[i] == 1 && coins[i] == 0)
                 q.push(i);
@@ -47,8 +45,6 @@ public:
             }
         }
 
-        // Phase 2:
-        // Remove 2 layers
         for (int i = 0; i < n; i++) {
             if (degree[i] == 1)
                 q.push(i);
