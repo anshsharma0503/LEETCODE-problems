@@ -1,19 +1,25 @@
 class Solution {
 public:
+
+    bool isValid(long long mid, int x){
+        return mid * mid <= x;
+    }
+
     int mySqrt(int x) {
-        if(x == 0) return 0;
-        int lo = 1 , hi = x;
-        long long ans = 1;
 
-        while(lo <= hi){
-            long long mid = lo + (hi - lo) / 2;
+        long long lo = 0;
+        long long hi = x;
 
-            if(mid * mid <= x){
-                ans = mid;
-                lo = mid + 1;
-            } else hi = mid - 1;
+        while(lo < hi){
+
+            long long mid = lo + (hi - lo + 1) / 2;
+
+            if(isValid(mid, x))
+                lo = mid;
+            else
+                hi = mid - 1;
         }
 
-        return ans;
+        return (int)lo;
     }
 };
