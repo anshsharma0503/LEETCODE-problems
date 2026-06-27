@@ -7,12 +7,10 @@ public:
 
         int l = 0;
         for(int r =0 ; r < n ; r++){
-            mp[s[r]]++;
-            while(mp[s[r]] > 1){
-                mp[s[l]]--;
-                if(mp[s[l]] == 0) mp.erase(s[l]);
-                l++;
-            }
+            if(mp.find(s[r] )!= mp.end()) 
+                l = max(l, mp[s[r]] + 1);
+
+            mp[s[r]] = r;
 
             res = max(res , r - l + 1);
         }
