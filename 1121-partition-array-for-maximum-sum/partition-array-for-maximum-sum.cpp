@@ -1,28 +1,29 @@
 class Solution {
 public:
+    int maxSumAfterPartitioning(vector<int>& arr, int k) {
+        int n = arr.size();
 
-    vector<int> dp;
+        vector<int> dp(n + 1, 0);
 
-    int f(int i , int n , vector<int>& arr, int k){
-        if(i == arr.size())
-            return 0;
+        dp[n] = 0;
 
-        if(dp[i] != -1) return dp[i];
+        for (int i = n - 1; i >= 0; i--) {
 
-        int mx = 0 , ans= 0;
-        for(int j = i ; j < min(n , i + k) ; j++){
-            mx = max(mx, arr[j]);
-            int len = j - i + 1;
+            int ans = 0;
+            int mx = 0;
 
-            ans = max(ans , mx * len + f(j + 1 , n , arr , k));
+            for (int j = i; j < min(n, i + k); j++) {
+
+                mx = max(mx, arr[j]);
+
+                int len = j - i + 1;
+
+                ans = max(ans, mx * len + dp[j + 1]);
+            }
+
+            dp[i] = ans;
         }
 
-        return dp[i] = ans;
-    }
-
-    int maxSumAfterPartitioning(vector<int>& arr, int k) {
-        dp.resize(arr.size() , -1);
-
-        return f(0 , arr.size() ,  arr , k);
+        return dp[0];
     }
 };
